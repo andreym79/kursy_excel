@@ -1,0 +1,106 @@
+/* =========================================================
+   Тема G — «Табличная» (первый, зелёный вариант)
+   Глубокий зелёный, тёплая бумага, янтарные кнопки.
+   Подписи разделов оформлены как формулы Excel.
+   ========================================================= */
+:root {
+  --font-display: "Unbounded", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Golos Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --display-weight: 600;
+
+  --bg: #F4F2EC;          /* бумага */
+  --surface: #FBFAF7;
+  --card-bg: #FBFAF7;
+  --ink: #14201B;
+  --ink-hover: #26362F;
+  --muted: #4A5550;
+  --line: #DAD6CB;
+  --line-strong: #C8C3B6;
+  --placeholder: #E3DFD4;
+
+  --brand: #0E3B2A;       /* глубокий зелёный */
+  --brand-2: #16503A;
+  --brand-2-line: #2E5E4A;
+  --brand-ink: #F4F2EC;
+  --brand-muted: #BFCFC6;
+
+  --accent: #F2B441;      /* янтарь — кнопки */
+  --accent-hover: #F6C463;
+  --accent-ink: #14201B;
+  --accent-text: #1E7B4F; /* зелёный для подписей на светлом */
+
+  --link: #1E7B4F;
+  --link-hover: #145A39;
+  --focus: #F2B441;
+  --focus-soft: rgba(30,123,79,.12);
+
+  --header-bg: #0E3B2A;
+  --header-ink: #F4F2EC;
+  --chip-accent-bg: #F2B441;
+  --chip-accent-ink: #14201B;
+  --quote-bg: #E4EEE7;
+  --step-bg: #0E3B2A;
+  --step-ink: #F4F2EC;
+  --badge-bg: #F9E3B6;
+  --badge-ink: #6B4506;
+  --pick-bg: #F2B441;
+  --pick-ink: #14201B;
+  --stars: #9A6A0C;
+  --hot: #9A3B1F;
+
+  --ok-bg: #E4EEE7; --ok-ink: #145A39;
+  --error: #A12A1B; --error-bg: #F7E3DE;
+
+  --radius-sm: 6px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 22px;
+  --radius-btn: 12px; --radius-input: 10px; --radius-pill: 999px;
+  --radius-photo: 24px;
+}
+
+h1, h2, h3 { letter-spacing: -0.01em; }
+h1 { font-size: clamp(2rem, 1.2rem + 3.2vw, 3.5rem); line-height: 1.12; }
+h2 { font-size: clamp(1.6rem, 1.1rem + 1.8vw, 2.6rem); }
+
+/* Подписи разделов — как формулы */
+.section__kicker { font-family: var(--font-mono); font-weight: 500; }
+
+/* Шапка и hero — тёмно-зелёные */
+.site-header { border-bottom-color: #245A45; }
+.logo__sub, .menu-btn { color: var(--brand-muted); }
+.menu-btn { border-color: #3F6F5B; }
+.mobile-nav a { border-color: #245A45; }
+.mobile-nav { border-color: #245A45; }
+
+.hero { background: var(--brand); color: var(--brand-ink); }
+.hero .chip { color: #D5E0D9; border-color: #3F6F5B; }
+.hero .chip--accent { color: var(--chip-accent-ink); }
+.hero__lead, .hero .fact__label { color: var(--brand-muted); }
+.hero__facts { border-color: #2E5E4A; }
+.hero .btn--ghost { color: var(--brand-ink); border-color: #6F978A; }
+.hero .btn--ghost:hover { background: var(--brand-ink); color: var(--brand); }
+
+/* Hero: табличка «До курса / После» вместо фото */
+.hero__media { min-height: 0; display: grid; gap: 14px; align-content: center; }
+.teacher-card, .hero__badge { display: none; }
+.hero__photo { background: transparent; overflow: visible; }
+.sheet { background: #FBFAF7; color: var(--ink); border-radius: 18px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,.28); }
+.sheet__bar { display: flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px; background: #E7E3D8; border-bottom: 1px solid #D3CEC1; font-size: .88rem; color: var(--muted); }
+.sheet__bar i { width: 10px; height: 10px; border-radius: 50%; background: #C9C3B4; }
+.sheet__bar span { margin-left: 8px; }
+.sheet__fx { display: flex; gap: 12px; align-items: center; height: 40px; padding: 0 16px; border-bottom: 1px solid var(--line); font-family: var(--font-mono); font-size: .85rem; }
+.sheet__fx em { color: var(--muted); }
+.sheet__fx b { color: var(--accent-text); font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sheet table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.sheet th, .sheet td { padding: 12px 14px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); text-align: left; }
+.sheet tr:last-child th, .sheet tr:last-child td { border-bottom: 0; }
+.sheet td:last-child, .sheet th:last-child { border-right: 0; }
+.sheet thead th { font-weight: 600; background: #EFECE4; }
+.sheet .was { color: #9A3B1F; font-family: var(--font-mono); }
+.sheet .now { color: var(--accent-text); font-family: var(--font-mono); font-weight: 600; }
+.sheet .now--hl { background: #E4F1E8; box-shadow: inset 0 0 0 2px var(--accent-text); }
+.sheet__caption { font-size: .88rem; color: #9FB4A9; }
+@media (max-width: 520px) { .sheet th, .sheet td { padding: 10px; font-size: .88rem; } }
+
+.module__numeral { font-family: var(--font-mono); font-size: .9rem; color: var(--muted); }
+.card--dark .module__numeral { color: var(--brand-muted); }
+.quote-block { font-family: var(--font-body); font-weight: 500; }
