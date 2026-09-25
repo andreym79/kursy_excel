@@ -15,6 +15,7 @@
   --muted: #4B556C;
   --line: #DDD5C2;
   --line-strong: #C7BDA6;
+  --input-border: #8C8472; /* рамка полей формы ≥ 3:1 */
   --placeholder: #ECE6D8;
 
   --brand: #13203A;       /* тёмные секции */
@@ -27,10 +28,13 @@
   --accent-hover: #D8B452;
   --accent-ink: #13203A;
   --accent-text: #7A5F1E; /* золото для текста на светлом (контраст ≥ 4.5) */
+  --accent-on-dark: #C9A13B; /* золото на тёмно-синем: 6.7:1 */
+  --check-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2313203A' stroke-width='3.2'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E"); /* белая галочка на золоте не читается */
 
   --link: #13203A;
   --link-hover: #7A5F1E;
-  --focus: #C9A13B;
+  --focus: #13203A;        /* рамка фокуса на светлом: 14.8:1 (золото давало 2.2:1) */
+  --focus-on-dark: #C9A13B;
   --focus-soft: rgba(201,161,59,.18);
 
   --header-bg: rgba(247,244,236,.94);
@@ -44,7 +48,7 @@
   --badge-ink: #5C4613;
   --pick-bg: #EDE6D3;
   --pick-ink: #13203A;
-  --stars: #9A7412;
+  --stars: #8A6A12;        /* 4.6:1 */
   --hot: #9A3B1F;
 
   --ok-bg: #E3EEE3; --ok-ink: #1F4D2B;

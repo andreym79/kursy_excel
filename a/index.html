@@ -11,11 +11,13 @@
 <meta property="og:description" content="Три модуля, группы до 10 человек, удостоверение гос. образца.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://ВАШ-ДОМЕН.ru/assets/img/og-a.jpg">
+<link rel="icon" href="../assets/img/favicon-a.svg" type="image/svg+xml">
+<meta name="theme-color" content="#F7F4EC">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&amp;family=Golos+Text:wght@400;500;600&amp;display=swap">
-<link rel="stylesheet" href="../assets/css/base.css">
-<link rel="stylesheet" href="../assets/css/theme-a.css">
+<link rel="stylesheet" href="../assets/css/base.css?v=2">
+<link rel="stylesheet" href="../assets/css/theme-a.css?v=2">
 
 <script>
   /* Настройки страницы. metrikaId — номер счётчика Яндекс Метрики (8 цифр). 0 = счётчик выключен. */
@@ -94,7 +96,7 @@
     </div>
     <div class="hero__media">
       <div class="hero__photo">
-        <img src="../assets/img/teacher.jpg" alt="Преподаватель курса Светлана Кондратова" width="536" height="536" fetchpriority="high">
+        <picture><source srcset="../assets/img/teacher.webp" type="image/webp"><img src="../assets/img/teacher.jpg" alt="Преподаватель курса Светлана Кондратова" width="536" height="536" fetchpriority="high"></picture>
       </div>
       <div class="teacher-card">
         
@@ -242,21 +244,21 @@
       <h2 id="schedule-title">Ближайшие группы</h2>
     </div>
     <div class="schedule" role="table" aria-label="Расписание групп">
-      <div class="schedule__head" role="row"><span role="columnheader">Модуль</span><span role="columnheader">Даты</span><span role="columnheader">Время</span><span role="columnheader">Места</span><span></span></div>
+      <div class="schedule__head" role="row"><span role="columnheader">Модуль</span><span role="columnheader">Даты</span><span role="columnheader">Время</span><span role="columnheader">Места</span><span role="columnheader"><span class="visually-hidden">Запись</span></span></div>
       <div class="schedule__row" role="row">
         <span class="schedule__name" role="cell">1. Начинаем изучать Excel</span>
         <span class="schedule__cell" role="cell">[ДАТЫ]</span><span class="schedule__cell" role="cell">[ВРЕМЯ]</span><span class="schedule__cell" role="cell">[N] из 10</span>
-        <a class="btn btn--dark btn--sm" href="#signup" data-cta="schedule" data-module="Модуль 1. Начинаем изучать Excel (16 ч)">Забронировать</a>
+        <span class="schedule__action" role="cell"><a class="btn btn--dark btn--sm" href="#signup" data-cta="schedule" data-module="Модуль 1. Начинаем изучать Excel (16 ч)">Забронировать</a></span>
       </div>
       <div class="schedule__row" role="row">
         <span class="schedule__name" role="cell">2. Формулы и сводные таблицы</span>
         <span class="schedule__cell" role="cell">[ДАТЫ]</span><span class="schedule__cell" role="cell">[ВРЕМЯ]</span><span class="schedule__cell" role="cell">[N] из 10</span>
-        <a class="btn btn--dark btn--sm" href="#signup" data-cta="schedule" data-module="Модуль 2. Формулы и сводные таблицы (16 ч)">Забронировать</a>
+        <span class="schedule__action" role="cell"><a class="btn btn--dark btn--sm" href="#signup" data-cta="schedule" data-module="Модуль 2. Формулы и сводные таблицы (16 ч)">Забронировать</a></span>
       </div>
       <div class="schedule__row schedule__row--hot" role="row">
         <span class="schedule__name" role="cell">3. Финансовое моделирование</span>
         <span class="schedule__cell" role="cell">[ДАТЫ]</span><span class="schedule__cell" role="cell">[ВРЕМЯ]</span><span class="schedule__cell schedule__seats--hot" role="cell">осталось [N]</span>
-        <a class="btn btn--primary btn--sm" href="#signup" data-cta="schedule" data-module="Модуль 3. Финансовое моделирование (36 ч)">Забронировать</a>
+        <span class="schedule__action" role="cell"><a class="btn btn--primary btn--sm" href="#signup" data-cta="schedule" data-module="Модуль 3. Финансовое моделирование (36 ч)">Забронировать</a></span>
       </div>
     </div>
     <p class="schedule__note">Мест нет? Оставьте заявку — добавим в лист ожидания и позвоним, если место освободится.</p>
@@ -290,7 +292,7 @@
 <section class="section" id="teacher" aria-labelledby="teacher-title">
   <div class="container teacher">
     <div>
-      <div class="teacher__photo"><img src="../assets/img/teacher.jpg" alt="Светлана Владимировна Кондратова" width="536" height="536" loading="lazy"></div>
+      <div class="teacher__photo"><picture><source srcset="../assets/img/teacher.webp" type="image/webp"><img src="../assets/img/teacher.jpg" alt="Светлана Владимировна Кондратова" width="536" height="536" loading="lazy"></picture></div>
       <!-- TODO: видео-приветствие 30–60 сек (например, встроить с Rutube/VK Видео) -->
       <div class="ph teacher__video">Видео-приветствие преподавателя, 30–60 секунд</div>
     </div>
@@ -494,6 +496,6 @@
   </div>
 </footer>
 
-<script src="../assets/js/main.js" defer></script>
+<script src="../assets/js/main.js?v=2" defer></script>
 </body>
 </html>

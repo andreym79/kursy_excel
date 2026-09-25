@@ -1,0 +1,6 @@
+# Все текстовые файлы хранятся и выгружаются с переводом строки LF (см. .editorconfig)
+* text=auto eol=lf
+*.jpg binary
+*.png binary
+*.webp binary
+*.woff2 binary

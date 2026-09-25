@@ -15,6 +15,7 @@
   --muted: #6B5548;
   --line: #EADBCB;
   --line-strong: #D5C0AC;
+  --input-border: #9A8573; /* рамка полей формы ≥ 3:1 */
   --placeholder: #EFE2D5;
   --soft: #F4E6DA;        /* персиковые секции */
   --sage: #E6EDE2;        /* шалфей */
@@ -30,10 +31,12 @@
   --accent-hover: #9E3C27;
   --accent-ink: #FFFFFF;
   --accent-text: #A5402A;
+  --accent-on-dark: #F4A98E; /* светлая терракота на шоколаде: 7.1:1 (обычная давала 2.5:1) */
 
   --link: #3A2A22;
   --link-hover: #B4472F;
   --focus: #B4472F;
+  --focus-on-dark: #F4A98E;
   --focus-soft: rgba(180,71,47,.12);
 
   --header-bg: rgba(251,245,238,.94);
@@ -47,7 +50,7 @@
   --badge-ink: #7A3222;
   --pick-bg: #E6EDE2;
   --pick-ink: #2E4229;
-  --stars: #A96A10;
+  --stars: #94590C;        /* 5.2:1 */
   --hot: #A5402A;
 
   --ok-bg: #E6EDE2; --ok-ink: #2E4229;

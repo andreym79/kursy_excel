@@ -25,16 +25,17 @@ a/index.html            вариант A
 c/index.html            вариант C
 g/index.html            вариант G
 choose.html             служебная страница выбора (удалить после выбора)
-assets/css/base.css     общая раскладка и компоненты
+assets/css/base.css     общая раскладка, компоненты и правила доступности (фокус, контраст)
 assets/css/theme-a.css  цвета, шрифты и hero варианта A
 assets/css/theme-c.css  цвета, шрифты и hero варианта C
 assets/css/theme-g.css  цвета, шрифты и hero варианта G
 assets/js/main.js       меню, подстановка модуля, UTM-метки, отправка формы, цели Метрики
-assets/img/             изображения (сейчас только фото преподавателя)
+assets/img/             фото преподавателя (WebP + JPG), значки сайта favicon-a/c/g.svg
 api/lead.php            приём заявки → Telegram / MAX / e-mail + копия в файл
 api/config.example.php  шаблон настроек (скопировать в api/config.php)
 storage/                резервная копия заявок (закрыта от браузера, не в git)
 privacy.html            шаблон политики обработки ПДн (обязательна по 152-ФЗ)
+.htaccess               сжатие и кэш на хостинге (Apache)
 docs/SETUP.md           пошаговый запуск: хостинг, боты, почта
 docs/YANDEX.md          Метрика, цели, UTM-шаблон для Директа
 docs/CONTENT-TODO.md    что заполнить перед запуском

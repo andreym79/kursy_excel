@@ -1,13 +1,22 @@
 /* =========================================================
    base.css — общая раскладка и компоненты лендинга.
    Цвета, шрифты и скругления задаются темой:
-   theme-a.css (Академический премиум) или theme-c.css (Тёплый и живой).
+   theme-a.css (Академический премиум), theme-c.css (Тёплый и живой)
+   или theme-g.css (Табличный).
+   Требования (см. CLAUDE.md): контраст текста ≥ 4.5:1, рамки полей и
+   рамка фокуса ≥ 3:1, видимый фокус, prefers-reduced-motion.
    ========================================================= */
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; } /* отступ = высота закреплённой шапки */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
 
 body {
   margin: 0;
@@ -19,10 +28,19 @@ body {
 }
 
 img { max-width: 100%; display: block; }
+picture { display: contents; } /* <picture> с WebP не меняет раскладку: размеры задаёт <img> */
 a { color: var(--link); text-underline-offset: 3px; }
 a:hover { color: var(--link-hover); }
 
-:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+/* Фокус: на светлом фоне — тёмная рамка (--focus), на тёмных блоках — светлая (--focus-on-dark).
+   Цвет рамки переключается переменной --focus-ring у тёмных контейнеров. */
+body { --focus-ring: var(--focus); }
+.section--dark, .card--dark, .price--corp, .doc, .gallery__address, .site-footer { --focus-ring: var(--focus-on-dark); }
+.section--dark .form, .section--dark .card:not(.card--dark) { --focus-ring: var(--focus); }
+:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; }
+
+/* Галочка в списках: белая по умолчанию; темы со светлой кнопкой (золото, янтарь) задают тёмную */
+:root { --check-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E"); }
 
 h1, h2, h3 {
   font-family: var(--font-display);
@@ -56,7 +74,7 @@ p { margin: 0; }
   .section__head--split { grid-template-columns: 1.4fr 1fr; gap: 48px; }
 }
 .section__kicker { font-size: 0.95rem; font-weight: 600; color: var(--accent-text); }
-.section--dark .section__kicker { color: var(--accent); }
+.section--dark .section__kicker { color: var(--accent-on-dark); }
 .section__lead { font-size: 1.125rem; color: var(--muted); }
 .section--dark .section__lead { color: var(--brand-muted); }
 
@@ -133,8 +151,14 @@ p { margin: 0; }
 .hero__lead { font-size: clamp(1.08rem, 1rem + 0.4vw, 1.25rem); color: var(--muted); max-width: 36em; }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .hero__facts { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; padding-top: 24px; border-top: 1px solid var(--line); }
-.fact__value { display: block; font-family: var(--font-display); font-weight: var(--display-weight); font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.4rem); line-height: 1.1; }
-.fact__label { font-size: 0.9rem; color: var(--muted); }
+.fact__value { display: block; font-family: var(--font-display); font-weight: var(--display-weight); font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.4rem); line-height: 1.1; white-space: nowrap; }
+.fact__label { display: block; margin-top: 4px; font-size: 0.9rem; line-height: 1.4; color: var(--muted); }
+/* Телефон: три факта в ряд без переноса «20+ лет» и длинных подписей */
+@media (max-width: 479px) {
+  .hero__facts { gap: 10px; }
+  .fact__value { font-size: var(--fact-size-mobile, 1.4rem); }
+  .fact__label { font-size: 0.8rem; }
+}
 
 .hero__media { position: relative; min-height: 420px; }
 @media (min-width: 1000px) { .hero__media { min-height: 600px; } }
@@ -185,7 +209,7 @@ p { margin: 0; }
 .module { display: flex; flex-direction: column; gap: 16px; }
 .module__top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
 .module__hours { font-family: var(--font-display); font-weight: var(--display-weight); font-size: 1.4rem; color: var(--accent-text); }
-.card--dark .module__hours { color: var(--accent); }
+.card--dark .module__hours { color: var(--accent-on-dark); }
 .module details { border-top: 1px dashed var(--line-strong); padding-top: 14px; }
 .card--dark details { border-color: rgba(255,255,255,.25); }
 .module summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
@@ -196,7 +220,7 @@ p { margin: 0; }
 .checklist li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; }
 .checklist li::before {
   content: ""; width: 18px; height: 18px; margin-top: 4px; border-radius: 50%;
-  background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center / 11px no-repeat;
+  background: var(--accent) var(--check-icon) center / 11px no-repeat;
 }
 .module__result { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); font-size: 1rem; }
 .card--dark .module__result { border-color: rgba(255,255,255,.2); }
@@ -229,6 +253,7 @@ p { margin: 0; }
 .schedule__name { font-weight: 600; font-size: 1.08rem; }
 .schedule__cell { color: var(--muted); font-size: 0.98rem; }
 .schedule__seats--hot { color: var(--hot); font-weight: 600; }
+.schedule__action .btn { width: 100%; }
 .schedule__head { display: none; }
 @media (min-width: 900px) {
   .schedule__head, .schedule__row { grid-template-columns: 2.2fr 1.3fr 1.1fr 1fr 190px; }
@@ -316,7 +341,10 @@ p { margin: 0; }
 .contacts { display: grid; gap: 14px; padding: 0; margin: 8px 0 0; list-style: none; }
 .contacts li { display: grid; grid-template-columns: 24px 1fr; gap: 12px; align-items: center; }
 .contacts a { color: inherit; }
-.contacts svg { color: var(--accent); }
+.contacts svg { color: var(--accent-on-dark); }
+/* Телефон, мессенджеры и ссылка на карту — отдельные цели для пальца, не меньше 40 px по высоте */
+.contacts a, .map a { display: inline-block; padding-block: 10px; }
+.contacts li { min-height: 44px; }
 .map { min-height: 260px; }
 .map iframe { width: 100%; height: 300px; border: 0; border-radius: var(--radius-lg); }
 
@@ -325,7 +353,7 @@ p { margin: 0; }
 .field label, .field legend { font-size: 0.95rem; font-weight: 600; }
 .input {
   width: 100%; min-height: 52px; padding: 0 16px;
-  border: 1.5px solid var(--line-strong); border-radius: var(--radius-input);
+  border: 1.5px solid var(--input-border); border-radius: var(--radius-input);
   background: #FFFFFF; color: var(--ink); font: inherit; font-size: 1.05rem;
 }
 .input:focus { border-color: var(--ink); outline: none; box-shadow: 0 0 0 3px var(--focus-soft); }
@@ -337,7 +365,7 @@ fieldset.field { border: 0; margin: 0; padding: 0; }
 @media (min-width: 520px) { .radios { grid-template-columns: 1fr 1fr; } }
 .radio {
   display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 16px;
-  border: 1.5px solid var(--line-strong); border-radius: var(--radius-input); cursor: pointer; font-size: 1rem;
+  border: 1.5px solid var(--input-border); border-radius: var(--radius-input); cursor: pointer; font-size: 1rem;
 }
 .radio:has(input:checked) { border-color: var(--ink); background: var(--focus-soft); }
 .radio input, .consent input { width: 20px; height: 20px; accent-color: var(--ink); flex-shrink: 0; }
@@ -352,7 +380,7 @@ fieldset.field { border: 0; margin: 0; padding: 0; }
 .btn[disabled] { opacity: .6; cursor: progress; }
 
 /* Footer */
-.site-footer { padding-block: 28px; border-top: 1px solid rgba(255,255,255,.15); background: var(--brand); color: var(--brand-muted); font-size: 0.9rem; }
+.site-footer { padding-block: 18px; border-top: 1px solid rgba(255,255,255,.15); background: var(--brand); color: var(--brand-muted); font-size: 0.9rem; }
 .site-footer__row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
-.site-footer a { color: var(--brand-ink); }
+.site-footer a { color: var(--brand-ink); display: inline-block; padding-block: 10px; }
 .site-footer nav { display: flex; gap: 20px; flex-wrap: wrap; }
