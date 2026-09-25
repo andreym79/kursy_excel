@@ -1,0 +1,14 @@
+# Секреты — никогда не коммитить
+api/config.php
+
+# Заявки (персональные данные)
+storage/*
+!storage/.gitkeep
+!storage/.htaccess
+
+# Системное
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+node_modules/

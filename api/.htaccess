@@ -1,0 +1,7 @@
+# Закрываем доступ к конфигу из браузера (Apache)
+<Files "config.php">
+  Require all denied
+</Files>
+<Files "config.example.php">
+  Require all denied
+</Files>

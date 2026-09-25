@@ -1,0 +1,82 @@
+/* =========================================================
+   Тема A — «Академический премиум»
+   Тёмно-синий, слоновая кость, золото. Заголовки с засечками.
+   ========================================================= */
+:root {
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body: "Golos Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --display-weight: 600;
+
+  --bg: #F7F4EC;          /* слоновая кость */
+  --surface: #FBF9F3;
+  --card-bg: #FFFDF8;
+  --ink: #13203A;         /* тёмно-синий */
+  --ink-hover: #22345C;
+  --muted: #4B556C;
+  --line: #DDD5C2;
+  --line-strong: #C7BDA6;
+  --placeholder: #ECE6D8;
+
+  --brand: #13203A;       /* тёмные секции */
+  --brand-2: #1C2D50;
+  --brand-2-line: #33456B;
+  --brand-ink: #F7F4EC;
+  --brand-muted: #C3C9D6;
+
+  --accent: #C9A13B;      /* золото — кнопки */
+  --accent-hover: #D8B452;
+  --accent-ink: #13203A;
+  --accent-text: #7A5F1E; /* золото для текста на светлом (контраст ≥ 4.5) */
+
+  --link: #13203A;
+  --link-hover: #7A5F1E;
+  --focus: #C9A13B;
+  --focus-soft: rgba(201,161,59,.18);
+
+  --header-bg: rgba(247,244,236,.94);
+  --header-ink: #13203A;
+  --chip-accent-bg: #13203A;
+  --chip-accent-ink: #F7F4EC;
+  --quote-bg: #EDE6D3;
+  --step-bg: #13203A;
+  --step-ink: #F7F4EC;
+  --badge-bg: #F3E6C2;
+  --badge-ink: #5C4613;
+  --pick-bg: #EDE6D3;
+  --pick-ink: #13203A;
+  --stars: #9A7412;
+  --hot: #9A3B1F;
+
+  --ok-bg: #E3EEE3; --ok-ink: #1F4D2B;
+  --error: #A12A1B; --error-bg: #F7E3DE;
+
+  --radius-sm: 2px; --radius-md: 4px; --radius-lg: 6px; --radius-xl: 8px;
+  --radius-btn: 2px; --radius-input: 4px; --radius-pill: 999px;
+  --radius-photo: 200px 200px 6px 6px;   /* арка */
+}
+
+/* Hero: арка с фото преподавателя + синяя плашка */
+.hero__photo {
+  position: relative; width: min(100%, 460px); aspect-ratio: 460 / 560; margin-left: auto;
+  border-radius: 230px 230px 4px 4px; border: 1px solid var(--line);
+}
+.hero__photo img { transform: scale(1.22) translateY(6%); }
+.teacher-card {
+  position: absolute; left: 0; bottom: 0; width: min(88%, 330px);
+  padding: 24px 26px; background: var(--brand); color: var(--brand-ink);
+}
+.teacher-card__avatar { display: none; }
+.teacher-card__role { color: var(--brand-muted); }
+.hero__badge { display: none; }
+@media (max-width: 999px) {
+  .hero__media { min-height: 0; padding-bottom: 60px; }
+  .hero__photo { margin-inline: auto; width: min(100%, 380px); }
+  .teacher-card { left: 50%; transform: translateX(-50%); bottom: 0; width: min(92%, 360px); }
+}
+
+/* Римские цифры модулей */
+.module__numeral { font-family: var(--font-display); font-size: 3.2rem; line-height: 1; color: var(--accent-text); }
+.card--dark .module__numeral { color: var(--accent); }
+
+.btn--primary { letter-spacing: .01em; }
+h1, h2 { letter-spacing: -0.01em; }
