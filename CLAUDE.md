@@ -20,13 +20,14 @@
   `--input-border` — рамка полей формы (≥ 3:1 к белому); `--stars` — звёзды отзывов (≥ 4.5:1);
   `--check-icon` — галочка в списках (тёмная, если кнопка светлая — золото/янтарь); `--fact-size-mobile` — размер цифр hero на телефоне.
 - CSS и JS подключены с `?v=N` (кэш в браузере на 30 дней, см. `.htaccess`). **После правки CSS/JS увеличить N во всех `index.html`.**
-- Фото — WebP через `<picture>` с JPG-запасом (`teacher.webp` / `teacher.jpg`, аватарка `teacher-avatar.*` 144 px).
+- Фото — WebP через `<picture>` с JPG-запасом (`teacher.webp` / `teacher.jpg`, аватарка `teacher-avatar.*` 144 px; галерея `class-lesson` / `class-room` / `class-screen`; hero C — `hero-c-lesson`). Исходники вертикальные, в файлах уже нужный кадр. `picture` в CSS — `display: contents`, а `picture > source` — `display: none`: без второго правила пустой `<source>` занимает ячейку сетки и ломает галерею.
+- Видео-кружок (`.clip` в `base.css`, раздел 4 в `main.js`) под фото преподавателя: `assets/video/vpr-explain.mp4` (H.264, 400×400, круг зашит в само видео), обложка `vpr-explain-poster.webp`, субтитры `vpr-explain.ru.vtt` показываются в подписи под кругом. Видео грузится только по нажатию (`preload="none"`). Без JS работает как обычное видео с кнопками браузера. Новое видео: сжать `ffmpeg -map_metadata -1 -c:v libx264 -crf 26 -movflags +faststart -c:a aac -b:a 64k`, субтитры — Whisper `medium` (есть на компьютере владельца).
 - `main.js`: не использовать `form.name`/`form.phone` (конфликт со свойствами HTMLFormElement) — только `form.elements['...']`.
 - Форма шлёт JSON на `../api/lead.php`. Ответ: `{ok:true}` или `{ok:false,error}`.
 - Кнопки с `data-cta` шлют цель `cta_click`; `data-module="…"` подставляет модуль в `<select name="module">` (значение должно ТОЧНО совпадать с `<option value>`); `data-payer="company"` выбирает радиокнопку.
 
 ## Цели Метрики (идентификаторы JS-событий)
-`lead` (успешная отправка — главная цель для Директа), `lead_error`, `cta_click`, `program_open`, `phone_click`, `messenger_click`.
+`lead` (успешная отправка — главная цель для Директа), `lead_error`, `cta_click`, `program_open`, `phone_click`, `messenger_click`, `video_play`, `video_end`.
 
 ## Ограничения и требования
 - 152-ФЗ: персональные данные граждан РФ — хранение на серверах в РФ; галочка согласия обязательна; `privacy.html` должна быть заполнена.

@@ -3,7 +3,8 @@
    1. Мобильное меню
    2. Кнопки «Записаться на модуль N» подставляют модуль в форму
    3. Сбор UTM-меток, yclid и ClientID Метрики → скрытые поля формы
-   4. Отправка формы на /api/lead.php + цели Метрики
+   4. Видео-кружок: своя кнопка, кольцо прогресса, субтитры под кругом
+   5. Отправка формы на /api/lead.php + цели Метрики
    ========================================================= */
 (function () {
   'use strict';
@@ -112,7 +113,59 @@
   }
   fillHidden();
 
-  /* ---------- 4. Отправка формы ---------- */
+  /* ---------- 4. Видео-кружок ----------
+     Без скрипта видео работает с обычными кнопками браузера (атрибут controls).
+     Скрипт прячет их и включает круглую кнопку, кольцо прогресса и субтитры
+     в подписи под кругом (место под 3 строки зарезервировано в CSS). */
+  document.querySelectorAll('[data-clip]').forEach(function (clip) {
+    var video = clip.querySelector('video');
+    var btn = clip.querySelector('[data-clip-toggle]');
+    var ring = clip.querySelector('.clip__progress');
+    var subs = clip.querySelector('[data-clip-subs]');
+    if (!video || !btn) return;
+    var intro = subs ? subs.textContent : '';
+    var playLabel = btn.getAttribute('aria-label');
+    var started = false;
+
+    video.controls = false;
+    btn.hidden = false;
+    btn.addEventListener('click', function () {
+      if (video.paused) {
+        var p = video.play();
+        if (p && p.catch) p.catch(function () { video.controls = true; btn.hidden = true; });
+      } else {
+        video.pause();
+      }
+    });
+    video.addEventListener('play', function () {
+      clip.classList.add('is-playing');
+      btn.setAttribute('aria-label', 'Пауза');
+      if (!started) { started = true; goal('video_play'); }
+    });
+    video.addEventListener('pause', function () {
+      clip.classList.remove('is-playing');
+      btn.setAttribute('aria-label', playLabel);
+    });
+    video.addEventListener('ended', function () {
+      if (subs) subs.textContent = intro;
+      if (ring) ring.style.strokeDashoffset = '100';
+      goal('video_end');
+    });
+    video.addEventListener('timeupdate', function () {
+      if (ring && video.duration) ring.style.strokeDashoffset = String(100 - (video.currentTime / video.duration) * 100);
+    });
+
+    var track = video.textTracks && video.textTracks[0];
+    if (track && subs) {
+      track.mode = 'hidden';
+      track.addEventListener('cuechange', function () {
+        var cue = track.activeCues && track.activeCues[0];
+        if (cue) subs.textContent = cue.text;
+      });
+    }
+  });
+
+  /* ---------- 5. Отправка формы ---------- */
   if (!form) return;
   var statusBox = form.querySelector('.form__status');
   var submitBtn = form.querySelector('[type="submit"]');

@@ -13,8 +13,8 @@
 <meta property="og:image" content="https://ВАШ-ДОМЕН.ru/assets/img/og-a.jpg">
 <link rel="icon" href="../assets/img/favicon-a.svg" type="image/svg+xml">
 <meta name="theme-color" content="#F7F4EC">
-<link rel="stylesheet" href="../assets/css/base.css?v=3">
-<link rel="stylesheet" href="../assets/css/theme-a.css?v=3">
+<link rel="stylesheet" href="../assets/css/base.css?v=4">
+<link rel="stylesheet" href="../assets/css/theme-a.css?v=4">
 <!-- Шрифты лежат на сайте (assets/fonts/), предзагружаем те, что нужны первому экрану -->
 <link rel="preload" href="../assets/fonts/golos-text-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/golos-text-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -275,10 +275,9 @@
       <h2 id="place-title">Компьютерный класс в РТУ МИРЭА — ничего не нужно брать с собой</h2>
     </div>
     <div class="gallery">
-      <!-- TODO: заменить плейсхолдеры на фото -->
-      <div class="ph">Фото: занятие в компьютерном классе</div>
-      <div class="ph">Фото: аудитория</div>
-      <div class="ph">Фото: перерыв с кофе</div>
+      <picture><source type="image/webp" srcset="../assets/img/class-lesson-600.webp 600w, ../assets/img/class-lesson-1200.webp 1200w" sizes="(min-width: 900px) 600px, 100vw"><img class="gallery__photo gallery__photo--main" src="../assets/img/class-lesson.jpg" alt="Занятие в компьютерном классе: преподаватель разбирает функцию ПРОСМОТРХ на большом экране, слушатели работают за компьютерами" width="1200" height="800" loading="lazy" decoding="async"></picture>
+      <picture><source type="image/webp" srcset="../assets/img/class-room-600.webp"><img class="gallery__photo" src="../assets/img/class-room.jpg" alt="Компьютерный класс: ряды рабочих мест с мониторами, экран и проектор" width="600" height="400" loading="lazy" decoding="async"></picture>
+      <picture><source type="image/webp" srcset="../assets/img/class-screen-600.webp"><img class="gallery__photo gallery__photo--screen" src="../assets/img/class-screen.jpg" alt="Вид с задних рядов: слайд занятия на большом экране хорошо виден" width="600" height="400" loading="lazy" decoding="async"></picture>
       <div class="gallery__address"><b>Москва, пр. Вернадского, 78, стр. 4</b><span>[N] минут пешком от метро «[СТАНЦИЯ]». [Информация о парковке]</span></div>
     </div>
     <div class="grid grid--4 features" style="--gap:14px">
@@ -295,8 +294,20 @@
   <div class="container teacher">
     <div>
       <div class="teacher__photo"><picture><source srcset="../assets/img/teacher.webp" type="image/webp"><img src="../assets/img/teacher.jpg" alt="Светлана Владимировна Кондратова" width="536" height="536" loading="lazy"></picture></div>
-      <!-- TODO: видео-приветствие 30–60 сек (например, встроить с Rutube/VK Видео) -->
-      <div class="ph teacher__video">Видео-приветствие преподавателя, 30–60 секунд</div>
+      <!-- Видео-кружок: без JS работает как обычное видео с кнопками; main.js включает свою кнопку, кольцо и субтитры под кругом -->
+      <figure class="clip" data-clip>
+        <div class="clip__circle">
+          <video class="clip__video" id="clip-vpr" controls preload="none" playsinline poster="../assets/video/vpr-explain-poster.webp" width="400" height="400">
+            <source src="../assets/video/vpr-explain.mp4" type="video/mp4">
+            <track kind="captions" src="../assets/video/vpr-explain.ru.vtt" srclang="ru" label="Русские субтитры" default>
+          </video>
+          <svg class="clip__ring" viewBox="0 0 100 100" aria-hidden="true"><circle class="clip__track" cx="50" cy="50" r="48.5"/><circle class="clip__progress" cx="50" cy="50" r="48.5" pathLength="100"/></svg>
+          <button class="clip__btn" type="button" aria-controls="clip-vpr" aria-label="Смотреть видео: ВПР и закрепление диапазона клавишей F4" data-clip-toggle hidden>
+            <span class="clip__disc" aria-hidden="true"><svg class="clip__icon clip__icon--play" width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg><svg class="clip__icon clip__icon--pause" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></span>
+          </button>
+        </div>
+        <figcaption class="clip__caption"><b>Минута из курса: ВПР и клавиша F4</b><span data-clip-subs>Как закрепить диапазон знаком $ и протянуть формулу на весь столбец. Со звуком и субтитрами, 58 секунд.</span></figcaption>
+      </figure>
     </div>
     <div class="teacher__body">
       <div class="section__head" style="margin:0">
@@ -498,6 +509,6 @@
   </div>
 </footer>
 
-<script src="../assets/js/main.js?v=3" defer></script>
+<script src="../assets/js/main.js?v=4" defer></script>
 </body>
 </html>

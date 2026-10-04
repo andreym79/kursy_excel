@@ -41,6 +41,7 @@ body {
 
 img { max-width: 100%; display: block; }
 picture { display: contents; } /* <picture> с WebP не меняет раскладку: размеры задаёт <img> */
+picture > source { display: none; } /* иначе в сетке (галерея) пустой <source> занимает ячейку */
 a { color: var(--link); text-underline-offset: 3px; }
 a:hover { color: var(--link-hover); }
 
@@ -275,12 +276,14 @@ p { margin: 0; }
 
 /* Локация */
 .gallery { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
-.gallery .ph:first-child { grid-column: 1 / -1; min-height: 240px; }
-.gallery .ph { min-height: 150px; }
+/* Фото: на телефоне — большое сверху и два рядом, на компьютере — большое слева на две строки */
+.gallery__photo { width: 100%; height: 150px; object-fit: cover; border-radius: var(--radius-lg); background: var(--placeholder); }
+.gallery__photo--main { grid-column: 1 / -1; height: 240px; }
+.gallery__photo--screen { object-position: 72% 50%; } /* экран справа в кадре — не обрезать */
 @media (min-width: 900px) {
   .gallery { grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 190px 190px; }
-  .gallery .ph:first-child { grid-column: auto; grid-row: 1 / span 2; min-height: 0; }
-  .gallery .ph { min-height: 0; }
+  .gallery__photo { height: 100%; }
+  .gallery__photo--main { grid-column: auto; grid-row: 1 / span 2; }
 }
 .gallery__address { grid-column: 1 / -1; padding: 24px 28px; border-radius: var(--radius-lg); background: var(--brand); color: var(--brand-ink); display: grid; gap: 4px; align-content: center; }
 @media (min-width: 900px) { .gallery .gallery__address { grid-column: 2 / span 2; } }
@@ -295,7 +298,27 @@ p { margin: 0; }
 @media (min-width: 900px) { .teacher { grid-template-columns: 400px 1fr; gap: 72px; } }
 .teacher__photo { aspect-ratio: 1; overflow: hidden; border-radius: var(--radius-photo); background: var(--placeholder); }
 .teacher__photo img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.15); }
-.teacher__video { margin-top: 16px; min-height: 64px; }
+
+/* Видео-кружок (как в Telegram): круг зашит в само видео, кольцо по краю — прогресс, субтитры — под кругом */
+.clip { margin: 24px 0 0; display: grid; gap: 14px; justify-items: center; text-align: center; }
+.clip__circle { position: relative; width: min(100%, 320px); aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: var(--placeholder); }
+.clip__video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.clip__ring { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; transform: rotate(-90deg); }
+.clip__ring circle { fill: none; stroke-width: 2.2; }
+.clip__track { stroke: var(--line); }
+.clip__progress { stroke: var(--accent); stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset .25s linear; }
+.clip__btn { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; }
+.clip__btn[hidden] { display: none; }
+.clip__disc { display: flex; align-items: center; justify-content: center; width: 68px; height: 68px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); box-shadow: 0 8px 24px rgba(0,0,0,.25); transition: opacity .2s ease; }
+.clip__icon--pause { display: none; }
+.clip.is-playing .clip__icon--play { display: none; }
+.clip.is-playing .clip__icon--pause { display: block; }
+.clip.is-playing .clip__disc { opacity: 0; }
+.clip.is-playing .clip__btn:hover .clip__disc, .clip.is-playing .clip__btn:focus-visible .clip__disc { opacity: .92; }
+.clip__caption { display: grid; gap: 4px; max-width: 340px; }
+.clip__caption b { font-size: 1.05rem; }
+.clip__caption span { min-height: 4.65em; color: var(--muted); font-size: .95rem; line-height: 1.55; } /* место под 3 строки: смена субтитров не двигает страницу */
+.clip.is-playing .clip__caption span { color: var(--ink); }
 .teacher__body { display: grid; gap: 26px; }
 .facts-table { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; }
 @media (min-width: 720px) { .facts-table { grid-template-columns: 1fr 1fr; } }

@@ -33,7 +33,8 @@ assets/css/theme-c.css  цвета, шрифты и hero варианта C
 assets/css/theme-g.css  цвета, шрифты и hero варианта G
 assets/js/main.js       меню, подстановка модуля, UTM-метки, отправка формы, цели Метрики
 assets/fonts/           шрифты на самом сайте (woff2), без обращений к Google
-assets/img/             фото преподавателя (WebP + JPG), значки сайта favicon-a/c/g.svg
+assets/video/           видео-кружок «ВПР и клавиша F4»: mp4, обложка, субтитры .vtt
+assets/img/             фото преподавателя и класса (WebP + JPG), значки сайта favicon-a/c/g.svg
 api/lead.php            приём заявки → Telegram / MAX / e-mail + копия в файл
 api/config.example.php  шаблон настроек (скопировать в api/config.php)
 storage/                резервная копия заявок (закрыта от браузера, не в git)
