@@ -1,6 +1,18 @@
 # Скорость загрузки (Apache, обычный shared-хостинг).
 # Если хостинг на nginx без .htaccess — попросите поддержку включить gzip и кэш для css/js/картинок/шрифтов.
 
+# Страницы a/ и c/ собирает index.php: тексты (цены, даты, расписание) приходят из CRM
+DirectoryIndex index.php index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # список полей для CRM («Обновить список полей»)
+  RewriteRule ^cms-fields\.json$ api/cms-fields.php [L]
+  # /a/index.html → /a/, чтобы все видели тексты из CRM (только адрес, набранный посетителем)
+  RewriteCond %{THE_REQUEST} \s/+[a-z]/index\.html[\s?]
+  RewriteRule ^([a-z])/index\.html$ /$1/ [R=301,L]
+</IfModule>
+
 # Сжатие текстовых файлов (HTML, CSS, JS, SVG)
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json image/svg+xml

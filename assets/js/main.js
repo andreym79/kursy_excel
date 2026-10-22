@@ -1,5 +1,5 @@
 /* =========================================================
-   main.js — поведение лендинга (общий для вариантов A, C и G)
+   main.js — поведение лендинга (общий для вариантов A и C)
    1. Мобильное меню
    2. Кнопки «Записаться на модуль N» подставляют модуль в форму
    3. Сбор UTM-меток, yclid и ClientID Метрики → скрытые поля формы
@@ -11,6 +11,14 @@
 
   var CFG = window.LANDING_CONFIG || {};
   var YM_ID = Number(CFG.metrikaId) || 0;
+
+  /* Срок перезвона — тот же текст, что в подсказке под формой (меняется в CRM, поле callback_time) */
+  function callbackText() {
+    if (CFG.callbackText) return CFG.callbackText;
+    var el = document.querySelector('[data-cms="callback_time"]');
+    var term = el ? el.textContent.trim() : '';
+    return term && term.charAt(0) !== '[' ? 'в течение ' + term + ' в рабочее время' : 'в ближайшее рабочее время';
+  }
 
   /* ---------- Метрика: безопасный вызов цели ---------- */
   function goal(name, params) {
@@ -223,7 +231,7 @@
       .then(function (res) {
         if (!res || !res.ok) throw new Error(res && res.error ? res.error : 'send_failed');
         statusBox.className = 'form__status form__status--ok';
-        statusBox.textContent = 'Заявка отправлена. Преподаватель перезвонит вам ' + (CFG.callbackText || 'в ближайшее рабочее время') + '.';
+        statusBox.textContent = 'Заявка отправлена. Преподаватель перезвонит вам ' + callbackText() + '.';
         goal('lead', { module: payload.module, payer: payload.payer });
         form.reset();
         fillHidden();

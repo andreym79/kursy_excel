@@ -2,7 +2,7 @@
 /**
  * Приём заявки с лендинга и рассылка ответственному.
  * POST application/json → {"ok":true} | {"ok":false,"error":"..."}
- * Каналы: Telegram, MAX, e-mail + резервная копия в файл.
+ * Каналы: Mini CRM, Telegram, MAX, e-mail + резервная копия в файл.
  * Требования: PHP 7.4+, расширение curl.
  */
 declare(strict_types=1);
@@ -102,6 +102,31 @@ function http_post_json(string $url, array $body, array $headers = [], string $c
 }
 
 $sent = [];
+
+// Mini CRM (модуль «Заявки с сайта»): контакт, сделка и задача «Обработать заявку» ответственному.
+// Лимиты полей — как в CRM: имя 100, UTM 100, страница 500 символов.
+$crm = $cfg['crm'] ?? [];
+if (!empty($crm['url']) && !empty($crm['form_key'])) {
+    $details = ['Модуль: ' . ($lead['module'] ?: 'помочь выбрать'), 'Оплата: ' . $payerText];
+    if ($utm['utm_content'] !== '') $details[] = 'Объявление: ' . $utm['utm_content'];
+    if ($utm['utm_term'] !== '')    $details[] = 'Ключевая фраза: ' . $utm['utm_term'];
+    if ($utm['yclid'] !== '')       $details[] = 'yclid: ' . $utm['yclid'];
+    $details[] = 'Вариант страницы: ' . ($lead['variant'] ?: '—');
+    $sent['crm'] = http_post_json(
+        rtrim((string)$crm['url'], '/') . '/api/public/forms/' . rawurlencode((string)$crm['form_key']),
+        [
+            'name'         => mb_substr($lead['name'], 0, 100),
+            'phone'        => $lead['phone'],
+            'message'      => implode("\n", $details),
+            'page'         => $pageUrl,
+            'utm_source'   => mb_substr($utm['utm_source'], 0, 100),
+            'utm_medium'   => mb_substr($utm['utm_medium'], 0, 100),
+            'utm_campaign' => mb_substr($utm['utm_campaign'], 0, 100),
+        ],
+        [],
+        (string)($crm['ca_file'] ?? '')
+    );
+}
 
 // Telegram
 $tg = $cfg['telegram'] ?? [];
