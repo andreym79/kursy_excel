@@ -1,21 +1,11 @@
 /* =========================================================
-   Тема A — «Академический премиум»
-   Тёмно-синий, слоновая кость, золото. Заголовки с засечками.
+   Тема A — «Деловой»
+   Тёмно-синий, слоновая кость, золото. Строгие заголовки без засечек
+   (тот же Golos Text, что и текст), сдержанные скругления.
    ========================================================= */
 
-/* Шрифт заголовков варианта A — Playfair Display — файлы в assets/fonts/ (скачаны с Google Fonts 25.09.2026, лицензия OFL). Один переменный файл на набор символов. */
-@font-face { font-family: "Playfair Display"; font-style: normal; font-weight: 500 700; font-display: swap;
-  src: url("../fonts/playfair-display-cyrillic.woff2") format("woff2");
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }  /* cyrillic */
-@font-face { font-family: "Playfair Display"; font-style: normal; font-weight: 500 700; font-display: swap;
-  src: url("../fonts/playfair-display-latin.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }  /* latin */
-@font-face { font-family: "Playfair Display"; font-style: normal; font-weight: 500 700; font-display: swap;
-  src: url("../fonts/playfair-display-latin-ext.woff2") format("woff2");
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }  /* latin-ext */
-
 :root {
-  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-display: "Golos Text", "Segoe UI", system-ui, -apple-system, sans-serif;
   --font-body: "Golos Text", "Segoe UI", system-ui, -apple-system, sans-serif;
   --display-weight: 600;
 
@@ -66,20 +56,19 @@
   --ok-bg: #E3EEE3; --ok-ink: #1F4D2B;
   --error: #A12A1B; --error-bg: #F7E3DE;
 
-  --radius-sm: 2px; --radius-md: 4px; --radius-lg: 6px; --radius-xl: 8px;
-  --radius-btn: 2px; --radius-input: 4px; --radius-pill: 999px;
-  --radius-photo: 200px 200px 6px 6px;   /* арка */
+  --radius-sm: 6px; --radius-md: 10px; --radius-lg: 14px; --radius-xl: 18px;
+  --radius-btn: 10px; --radius-input: 10px; --radius-pill: 8px;
+  --radius-photo: 20px;
 }
 
-/* Hero: арка с фото преподавателя + синяя плашка */
+/* Hero: фото преподавателя в круге (исходник уже вырезан кругом, углы белые) + синяя плашка */
 .hero__photo {
-  position: relative; width: min(100%, 460px); aspect-ratio: 460 / 560; margin-left: auto;
-  border-radius: 230px 230px 4px 4px; border: 1px solid var(--line);
+  position: relative; width: min(100%, 440px); aspect-ratio: 1; margin-left: auto;
+  border-radius: 50%; border: 1px solid var(--line);
 }
-.hero__photo img { transform: scale(1.22) translateY(6%); }
 .teacher-card {
   position: absolute; left: 0; bottom: 0; width: min(88%, 330px);
-  padding: 24px 26px; background: var(--brand); color: var(--brand-ink);
+  padding: 24px 26px; border-radius: var(--radius-lg); background: var(--brand); color: var(--brand-ink);
 }
 .teacher-card__avatar { display: none; }
 .teacher-card__role { color: var(--brand-muted); }
@@ -90,9 +79,7 @@
   .teacher-card { left: 50%; transform: translateX(-50%); bottom: 0; width: min(92%, 360px); }
 }
 
-/* Римские цифры модулей */
-.module__numeral { font-family: var(--font-display); font-size: 3.2rem; line-height: 1; color: var(--accent-text); }
+/* Римские цифры модулей — крупно, без засечек */
+.module__numeral { font-family: var(--font-display); font-weight: 600; font-size: 2.4rem; line-height: 1; letter-spacing: -0.02em; color: var(--accent-text); }
 .card--dark .module__numeral { color: var(--accent); }
 
-.btn--primary { letter-spacing: .01em; }
-h1, h2 { letter-spacing: -0.01em; }

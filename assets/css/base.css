@@ -58,10 +58,11 @@ h1, h2, h3 {
   font-family: var(--font-display);
   font-weight: var(--display-weight);
   line-height: 1.15;
+  letter-spacing: -0.02em;
   margin: 0;
   text-wrap: balance;
 }
-h1 { font-size: clamp(2.1rem, 1.3rem + 3.6vw, 4rem); line-height: 1.08; }
+h1 { font-size: clamp(2.1rem, 1.3rem + 3vw, 3.5rem); line-height: 1.08; }
 h2 { font-size: clamp(1.7rem, 1.2rem + 2vw, 2.75rem); }
 h3 { font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.6rem); line-height: 1.25; }
 p { margin: 0; }
@@ -85,7 +86,7 @@ p { margin: 0; }
 @media (min-width: 900px) {
   .section__head--split { grid-template-columns: 1.4fr 1fr; gap: 48px; }
 }
-.section__kicker { font-size: 0.95rem; font-weight: 600; color: var(--accent-text); }
+.section__kicker { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-text); }
 .section--dark .section__kicker { color: var(--accent-on-dark); }
 .section__lead { font-size: 1.125rem; color: var(--muted); }
 .section--dark .section__lead { color: var(--brand-muted); }
@@ -210,7 +211,7 @@ p { margin: 0; }
 .quote-block {
   margin: 28px 0 0; padding: clamp(24px, 3vw, 40px);
   border-radius: var(--radius-lg); background: var(--quote-bg);
-  font-family: var(--font-display); font-size: clamp(1.2rem, 1rem + 0.8vw, 1.6rem); line-height: 1.45;
+  font-family: var(--font-display); font-weight: 500; font-size: clamp(1.15rem, 1rem + 0.6vw, 1.45rem); line-height: 1.45;
 }
 
 /* Роли */
@@ -295,7 +296,7 @@ p { margin: 0; }
 /* Преподаватель */
 .teacher { display: grid; gap: 40px; align-items: start; }
 @media (min-width: 900px) { .teacher { grid-template-columns: 400px 1fr; gap: 72px; } }
-.teacher__photo { aspect-ratio: 1; overflow: hidden; border-radius: var(--radius-photo); background: var(--placeholder); }
+.teacher__photo { aspect-ratio: 1; overflow: hidden; border-radius: 50%; /* исходник фото уже вырезан кругом */ background: var(--placeholder); }
 .teacher__photo img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.15); }
 
 /* Видео-кружок (как в Telegram): круг зашит в само видео, кольцо по краю — прогресс, субтитры — под кругом */
